@@ -254,8 +254,12 @@ O projeto adota princípios de segurança e supervisão:
 ```text
 Agente_IA_DataQuality_Groq/
 ├── 01_data/
+├── 02_logs/
+│   └── .gitkeep
 ├── 03_reports/
+│   └── .gitkeep
 ├── 04_documentacao/
+│   └── VALIDACAO_TESTE_VOLUME_AGENTE_IA_DATA_QUALITY.md
 ├── src/
 │   ├── data_quality.py
 │   ├── main.py
@@ -265,6 +269,7 @@ Agente_IA_DataQuality_Groq/
 │   └── validar_interpretacao.py
 ├── tests/
 ├── gerar_dataset_teste.py
+├── requirements.txt
 ├── .gitignore
 └── README.md
 ```
@@ -276,7 +281,7 @@ Os relatórios gerados durante a execução são armazenados localmente e não f
 ### 1. Clonar o repositório
 
 ```bash
-git clone URL_DO_REPOSITORIO
+git clone https://github.com/rrleone/Agente_IA_DataQuality_Groq.git
 cd Agente_IA_DataQuality_Groq
 ```
 
@@ -291,11 +296,13 @@ source .venv/bin/activate
 
 ### 3. Instalar dependências
 
-Instale as dependências listadas no arquivo de dependências do projeto.
+pip install -r requirements.txt
 
 ### 4. Configurar a API Groq
 
 Configure a variável de ambiente `GROQ_API_KEY` com sua chave pessoal.
+
+export GROQ_API_KEY="sua_chave_groq"
 
 Nunca publique sua chave de API no código ou no repositório.
 
