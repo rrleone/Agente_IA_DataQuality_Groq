@@ -1,255 +1,190 @@
+# Agente de IA — Data Quality
 
-<h1 align="center">Agente de IA — Data Quality</h1>
-
-<h2 align="center">AI-Powered Data Quality Analysis &amp; Validation</h2>
+<h2 align="center">AI-Powered Data Quality Analysis & Validation</h2>
 
 <p align="center">
   Data Quality · Python · AI Agents · Data Validation · Human-in-the-Loop
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/PYTHON-3776AB?style=flat&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/PANDAS-150458?style=flat&logo=pandas&logoColor=white" />
-  <img src="https://img.shields.io/badge/GROQ_API-F55036?style=flat&logoColor=white" />
-  <img src="https://img.shields.io/badge/GPT--OSS--20B-412991?style=flat&logoColor=white" />
-  <img src="https://img.shields.io/badge/PYTEST-2676B8?style=flat&logo=pytest&logoColor=white" />
-  <img src="https://img.shields.io/badge/JSON-34495E?style=flat&logo=json&logoColor=white" />
-  <img src="https://img.shields.io/badge/GIT%20%2F%20GITHUB-24292F?style=flat&logo=github&logoColor=white" />
-</p>
-
-<p align="center">
-  <strong>Transformando inconsistências em dados confiáveis, análises estruturadas e decisões orientadas por qualidade.</strong>
+  <img src="https://img.shields.io/badge/Python-3.12-blue" alt="Python 3.12">
+  <img src="https://img.shields.io/badge/Pandas-Data%20Analysis-150458" alt="Pandas">
+  <img src="https://img.shields.io/badge/Groq-LLM-orange" alt="Groq">
+  <img src="https://img.shields.io/badge/Data%20Quality-Validation-green" alt="Data Quality">
+  <img src="https://img.shields.io/badge/AI-Human--in--the--Loop-purple" alt="Human in the Loop">
 </p>
 
 ---
 
-## Visão Executiva
+## 1. Visão geral
 
-O **Agente de IA — Data Quality** é um projeto de desenvolvimento de uma solução inteligente aplicada à análise, identificação e interpretação de problemas de qualidade de dados.
+O **Agente de IA — Data Quality** é um projeto de análise e validação da qualidade de dados que combina regras determinísticas, processamento com Python e Pandas e inteligência artificial generativa.
 
-A solução combina processamento técnico com Python, validação de regras de negócio e Inteligência Artificial generativa utilizando a API da Groq e o modelo GPT-OSS-20B.
+O objetivo é transformar verificações técnicas em informações estruturadas, recomendações de tratamento e insights que apoiem a tomada de decisão.
 
-O agente analisa conjuntos de dados, identifica inconsistências, estrutura recomendações de tratamento e utiliza IA para transformar resultados técnicos em informações organizadas e compreensíveis.
+A solução utiliza a API Groq para interpretar resultados e auxiliar na elaboração de recomendações, mantendo a validação técnica e a aprovação das ações sob responsabilidade humana.
 
-A arquitetura incorpora uma etapa de validação da interpretação gerada pela IA, buscando assegurar consistência entre os resultados da análise técnica e as conclusões apresentadas.
+## 2. Problema de negócio
 
-Mais do que identificar problemas, o projeto explora como agentes de IA podem apoiar processos de Data Quality, mantendo o analista responsável pela validação, interpretação e aprovação das ações recomendadas.
+Dados inconsistentes, incompletos ou inválidos comprometem análises, indicadores e decisões.
 
-**DATA QUALITY · DATA ANALYTICS · ARTIFICIAL INTELLIGENCE**
+Em processos de Data Quality, a identificação de problemas pode exigir verificações manuais e interpretação de múltiplas regras.
 
-Dados → Análise Técnica → Regras de Negócio → IA → Validação → Decisão
+Este projeto explora como a combinação de validações tradicionais e IA pode:
 
-## Problema de Negócio
+- Identificar problemas de qualidade de dados.
+- Organizar resultados de forma estruturada.
+- Interpretar ocorrências e possíveis impactos.
+- Sugerir ações de tratamento.
+- Apoiar a análise sem substituir a decisão humana.
 
-A qualidade dos dados é fundamental para a confiabilidade das análises, indicadores e decisões utilizadas pelas organizações.
+## 3. Objetivos do projeto
 
-Bases de dados podem apresentar:
+- Desenvolver um agente de IA aplicado à qualidade de dados.
+- Automatizar verificações de consistência e validade.
+- Identificar problemas em bases de clientes.
+- Gerar recomendações contextualizadas.
+- Implementar validação da interpretação produzida pela IA.
+- Aplicar princípios de governança, segurança e supervisão humana.
 
-- Valores ausentes;
-- Identificadores duplicados;
-- Dados fora dos intervalos permitidos;
-- Informações com formatos inválidos;
-- Inconsistências em regras de negócio.
+## 4. Dataset
 
-A identificação manual dessas ocorrências pode exigir tempo, esforço operacional e conhecimento técnico.
-
-O projeto busca explorar como a combinação entre análise programática e Inteligência Artificial pode apoiar esse processo.
-
-### Questões abordadas
-
-- Quais problemas de qualidade existem na base?
-- Quais regras de negócio foram violadas?
-- Quantos registros estão envolvidos?
-- Quais problemas devem receber prioridade?
-- Como organizar recomendações de tratamento?
-- A interpretação da IA está consistente com os resultados técnicos?
-- Como preservar a supervisão humana durante o processo?
-
-O objetivo é transformar verificações técnicas em informações estruturadas para apoiar decisões relacionadas à qualidade dos dados.
-
-## Sobre os Dados
+O projeto utiliza uma **base sintética de clientes**, criada para testes e validação do agente.
 
 | Característica | Descrição |
 |---|---|
 | Tipo de projeto | Agente de IA aplicado a Data Quality |
 | Segmento | Data Analytics e Inteligência Artificial |
 | Formato de origem | CSV |
-| Dataset de validação | Base sintética de clientes |
+| Dataset de teste | Base sintética de clientes |
 | Volume analisado | 10.000 registros |
 | Estrutura | 4 colunas |
 | Processamento | Python e Pandas |
-| Interpretação | Groq API — GPT-OSS-20B |
-| Saída técnica | JSON e relatórios textuais |
 
-### Entidades e atributos analisados
+### Campos analisados
 
-| Campo | Descrição |
+- `id_cliente`
+- `nome`
+- `idade`
+- `email`
+
+A base contém ocorrências intencionalmente inseridas para simular problemas encontrados em cenários reais de qualidade de dados.
+
+## 5. Tecnologias utilizadas
+
+| Tecnologia | Aplicação |
 |---|---|
-| `id_cliente` | Identificador do cliente |
-| `nome` | Nome fictício do cliente |
-| `idade` | Idade utilizada nas validações |
-| `email` | E-mail utilizado nas verificações |
-
-Os dados utilizados no teste de volume são sintéticos e foram preparados para simular problemas controlados de qualidade.
-
-### Problemas introduzidos no dataset
-
-- Valores ausentes em idade e e-mail;
-- Identificadores duplicados;
-- E-mails com formato inválido;
-- Idades fora do intervalo permitido.
-
-A utilização de dados sintéticos permite testar o comportamento do agente sem expor informações pessoais reais.
-
-## Tecnologias e Ferramentas
-
-| Tecnologia | Aplicação no projeto |
-|---|---|
-| Python | Desenvolvimento da lógica do agente |
-| Pandas | Processamento e análise dos dados |
-| Groq API | Integração com modelo de IA |
-| GPT-OSS-20B | Interpretação dos resultados técnicos |
+| Python | Desenvolvimento e execução do agente |
+| Pandas | Manipulação e análise de dados |
+| Groq API | Interpretação e geração de recomendações por IA |
+| GPT-OSS-20B | Modelo utilizado na integração com Groq |
+| CSV | Fonte de dados |
 | Pytest | Testes automatizados |
-| CSV | Dados de entrada |
-| JSON | Relatórios e resultados estruturados |
-| Git / GitHub | Versionamento e publicação |
+| dotenv | Gerenciamento de variáveis de ambiente |
 
-## Metodologia
+## 6. Metodologia
 
-O projeto foi desenvolvido seguindo um fluxo de trabalho estruturado.
+O fluxo de processamento foi estruturado em etapas:
 
-### 1. Data Profiling
+1. Recepção da base de dados.
+2. Análise inicial e profiling.
+3. Aplicação de regras de qualidade.
+4. Identificação e consolidação de ocorrências.
+5. Interpretação dos resultados pela IA.
+6. Geração de recomendações.
+7. Validação da interpretação.
+8. Revisão e aprovação humana das ações sugeridas.
 
-Inspeção inicial do arquivo para compreender:
+### Dimensões de qualidade avaliadas
 
-- Dimensões;
-- Colunas;
-- Tipos de dados;
-- Estrutura da base;
-- Características dos registros.
+- Completude: identificação de valores ausentes.
+- Unicidade: identificação de registros duplicados.
+- Validade: verificação de formatos e valores permitidos.
+- Consistência: análise de regras e restrições.
+- Integridade: avaliação de condições relacionadas aos dados.
 
-### 2. Data Quality
+## 7. Arquitetura do projeto
 
-Verificações relacionadas a:
+A solução separa a análise determinística, a interpretação por IA e a validação das recomendações.
 
-- Valores ausentes;
-- Duplicidades;
-- Problemas estruturais;
-- Consistência dos registros.
+```text
+CSV
+ │
+ ▼
+Data Profiling
+ │
+ ▼
+Data Quality Rules
+ │
+ ▼
+Consolidação das ocorrências
+ │
+ ▼
+Agente de IA — Groq
+ │
+ ▼
+Interpretação e recomendações
+ │
+ ▼
+Validação da interpretação
+ │
+ ▼
+Revisão humana
+```
 
-### 3. Business Rules
+A IA atua como componente de apoio analítico, não como autoridade final sobre a qualidade dos dados.
 
-Implementação de regras de negócio para validar condições específicas.
+## 8. Resultados da validação
 
-| Regra | Coluna | Objetivo |
-|---|---|---|
-| `valor_unico` | `id_cliente` | Identificar identificadores duplicados |
-| `formato_email` | `email` | Identificar e-mails inválidos |
-| `intervalo_idade` | `idade` | Identificar valores fora do intervalo permitido |
-
-### 4. Treatment Planning
-
-Organização das ocorrências em um plano de tratamento contendo:
-
-- Regra violada;
-- Coluna afetada;
-- Severidade;
-- Quantidade de registros;
-- Recomendação;
-- Justificativa;
-- Status;
-- Necessidade de aprovação humana.
-
-### 5. AI Interpretation
-
-Utilização da IA para interpretar os resultados técnicos e estruturar um relatório com:
-
-- Resumo executivo;
-- Indicadores gerais;
-- Problemas identificados;
-- Violações das regras;
-- Registros afetados;
-- Riscos para o negócio;
-- Recomendações;
-- Priorização;
-- Conclusão.
-
-### 6. AI Validation
-
-Validação programática da interpretação produzida pela IA.
-
-O objetivo é identificar divergências entre os resultados técnicos e as afirmações apresentadas pelo modelo.
-
-### 7. Reporting
-
-Geração e armazenamento dos resultados técnicos, interpretação e validação em arquivos estruturados e textuais.
-
-### 8. Human-in-the-Loop
-
-As recomendações são submetidas à aprovação humana antes de qualquer tratamento.
-
-O agente não deve substituir a análise crítica nem executar correções sem autorização.
-
-## Arquitetura do Agente
-
-O fluxo do projeto segue as etapas:
-
-**Dados → Análise Técnica → Regras de Negócio → Plano de Tratamento → Interpretação da IA → Validação → Relatórios**
-
-A arquitetura separa a análise determinística da interpretação assistida por IA.
-
-| Componente | Responsabilidade |
-|---|---|
-| Análise técnica | Inspecionar a estrutura e os dados |
-| Regras de qualidade | Identificar violações das regras configuradas |
-| Plano de tratamento | Organizar recomendações e prioridades |
-| Interpretação da IA | Transformar resultados técnicos em relatório |
-| Validação da interpretação | Verificar consistência com os resultados técnicos |
-| Relatórios | Registrar resultados e evidências |
-| Supervisão humana | Aprovar ou rejeitar ações propostas |
-
-## Indicadores e Validações
-
-Foi realizado um teste de volume utilizando um dataset sintético de 10.000 registros e 4 colunas.
-
-### Resultados do teste
+A execução de validação do dataset de 10.000 registros apresentou os seguintes resultados:
 
 | Indicador | Resultado |
 |---|---:|
 | Registros analisados | 10.000 |
 | Colunas | 4 |
-| Células ausentes | 149 |
-| IDs duplicados envolvidos | 60 |
+| Células com valores ausentes | 149 |
+| Registros envolvidos em IDs duplicados | 60 |
 | E-mails inválidos | 80 |
-| Idades fora do intervalo | 7 |
+| Idades fora do intervalo esperado | 7 |
 | Regras violadas | 3 |
 | Ocorrências de regras | 147 |
-| Ações recomendadas | 3 |
-| Ações pendentes | 3 |
-| Alertas na validação da IA | 0 |
+| Recomendações / ações sugeridas | 3 |
+| Ações pendentes de aprovação | 3 |
+| Alertas na validação da interpretação | 0 |
 
-### Resultado da validação
+**Status da validação inicial:** aprovada.
 
-**VALIDAÇÃO INICIAL APROVADA**
+As recomendações geradas permanecem pendentes de aprovação humana, conforme a abordagem Human-in-the-Loop.
 
-A interpretação gerada pela IA foi submetida à validação programática para verificar sua consistência com os resultados técnicos.
+## 9. Data Quality e inteligência artificial
 
-No teste de volume realizado, a validação inicial foi aprovada, sem alertas identificados.
+O projeto diferencia responsabilidades técnicas e atividades apoiadas por IA.
 
-O resultado representa a validação do cenário testado e não garante a ausência de erros em todas as situações possíveis.
+| Etapa | Responsabilidade |
+|---|---|
+| Identificação de problemas | Regras determinísticas e Python |
+| Processamento dos dados | Pandas |
+| Interpretação contextual | IA generativa |
+| Recomendações | IA com base nos resultados |
+| Validação | Código e critérios definidos |
+| Aprovação de tratamento | Responsabilidade humana |
 
-## Segurança e Governança
+A IA acelera a interpretação e a comunicação dos resultados, mas não substitui as regras de qualidade, a validação técnica ou a análise do profissional.
+
+## 10. Segurança e governança
 
 O projeto adota princípios de segurança e supervisão:
 
-- Uso de variáveis de ambiente para armazenar credenciais;
-- Utilização de dados sintéticos nos testes documentados;
-- Separação entre análise técnica e interpretação da IA;
-- Validação programática das respostas;
-- Aprovação humana antes da execução de ações de tratamento;
-- Registro de recomendações e resultados para auditoria.
+- Chaves de API armazenadas em variáveis de ambiente.
+- Credenciais não incluídas no código-fonte.
+- Arquivo `.env` protegido pelo `.gitignore`.
+- Recomendações submetidas à aprovação humana.
+- Separação entre identificação técnica e interpretação por IA.
+- Validação das respostas produzidas pelo modelo.
 
-## Estrutura do Repositório
+A utilização de IA exige atenção à segurança, à rastreabilidade e à confiabilidade das recomendações.
+
+## 11. Estrutura do repositório
 
 ```text
 Agente_IA_DataQuality_Groq/
@@ -263,9 +198,8 @@ Agente_IA_DataQuality_Groq/
 ├── src/
 │   ├── data_quality.py
 │   ├── main.py
-│   ├── main_teste_volume.py
-│   ├── plano_tratamento.py
 │   ├── regras_qualidade.py
+│   ├── plano_tratamento.py
 │   └── validar_interpretacao.py
 ├── tests/
 ├── gerar_dataset_teste.py
@@ -274,9 +208,9 @@ Agente_IA_DataQuality_Groq/
 └── README.md
 ```
 
-Os relatórios gerados durante a execução são armazenados localmente e não fazem parte da publicação do repositório.
+Os relatórios e logs gerados durante a execução são armazenados localmente e não são publicados no repositório.
 
-## Como Executar
+## 12. Como executar o projeto
 
 ### 1. Clonar o repositório
 
@@ -284,8 +218,6 @@ Os relatórios gerados durante a execução são armazenados localmente e não f
 git clone https://github.com/rrleone/Agente_IA_DataQuality_Groq.git
 cd Agente_IA_DataQuality_Groq
 ```
-
-Substitua `URL_DO_REPOSITORIO` pela URL do repositório GitHub.
 
 ### 2. Criar ambiente virtual
 
@@ -296,13 +228,19 @@ source .venv/bin/activate
 
 ### 3. Instalar dependências
 
+```bash
 pip install -r requirements.txt
+```
 
 ### 4. Configurar a API Groq
 
 Configure a variável de ambiente `GROQ_API_KEY` com sua chave pessoal.
 
+```bash
 export GROQ_API_KEY="sua_chave_groq"
+```
+
+Substitua `sua_chave_groq` pela sua chave pessoal obtida na Groq.
 
 Nunca publique sua chave de API no código ou no repositório.
 
@@ -312,43 +250,51 @@ Nunca publique sua chave de API no código ou no repositório.
 python src/main.py
 ```
 
-## Aplicação da Inteligência Artificial
+## 13. Testes e validação
 
-A IA é utilizada como camada de interpretação e apoio à análise.
+O projeto inclui testes automatizados para verificar componentes e comportamentos da solução.
 
-| Etapa | Responsabilidade |
-|---|---|
-| Análise técnica | Executada programaticamente |
-| Identificação de regras | Determinística |
-| Plano de tratamento | Estruturado a partir das ocorrências |
-| Interpretação | Assistida por IA |
-| Validação | Verificação programática |
-| Aprovação | Responsabilidade humana |
+Para executar os testes:
 
-A IA não substitui as regras técnicas nem a decisão do analista.
+```bash
+pytest
+```
 
-## Limitações e Evoluções
+Os testes contribuem para a confiabilidade do processamento e para a validação das funcionalidades implementadas.
 
-Este projeto representa uma implementação experimental e de portfólio.
+## 14. Uso responsável da IA
 
-Possíveis evoluções:
+A IA generativa pode produzir interpretações incompletas ou incorretas.
 
-- Ampliação das regras de qualidade;
-- Suporte a diferentes estruturas de dados;
-- Evolução da validação das respostas da IA;
-- Implementação de logs estruturados e monitoramento;
-- Integração com bancos de dados;
-- Interface para acompanhamento e aprovação das recomendações.
+Por isso, a solução considera:
 
-Os resultados apresentados correspondem ao dataset sintético e ao cenário de teste documentado.
+- Validação das respostas.
+- Conferência das recomendações.
+- Supervisão humana.
+- Separação entre regras técnicas e interpretação generativa.
+- Não execução automática de ações críticas sem aprovação.
 
-## Conclusão
+O uso da IA é tratado como apoio ao profissional de dados, mantendo a responsabilidade analítica e decisória sob controle humano.
 
-O projeto demonstra como Python, regras de negócio e Inteligência Artificial podem ser combinados para apoiar processos de Data Quality.
+## 15. Possíveis evoluções
 
-A abordagem mantém a análise técnica como base, utiliza a IA para interpretação e preserva a supervisão humana nas decisões de tratamento.
+- Interface para acompanhamento das análises.
+- Histórico de execuções e recomendações.
+- Monitoramento contínuo da qualidade.
+- Ampliação das regras de Data Quality.
+- Integração com bancos de dados.
+- Geração de relatórios estruturados.
+- Comparação de resultados entre execuções.
+- Implementação de indicadores de qualidade.
+- Integração com pipelines de ETL.
 
-**Qualidade de dados não é apenas identificar inconsistências. É transformar problemas técnicos em informação confiável para decisões.**
+## 16. Conclusão
+
+O projeto demonstra como Python, Pandas e inteligência artificial generativa podem ser combinados para apoiar processos de Data Quality.
+
+A solução evidencia a importância de integrar automação, validação técnica, interpretação contextual e supervisão humana.
+
+Mais do que identificar inconsistências, o objetivo é transformar ocorrências de qualidade de dados em informações compreensíveis e recomendações que apoiem decisões mais confiáveis.
 
 ---
 
@@ -359,3 +305,7 @@ A abordagem mantém a análise técnica como base, utiliza a IA para interpreta�
 Analista de Dados | Business Intelligence
 
 Dados • Análise • Insights • Decisões
+
+GitHub: [github.com/rrleone](https://github.com/rrleone)
+
+Portfólio: [renatoleone](https://www.renatoleone.com.br)
