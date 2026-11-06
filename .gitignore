@@ -1,0 +1,24 @@
+
+# Credenciais e variáveis de ambiente
+.env
+.env.*
+
+# Ambientes Python
+.venv/
+venv/
+
+# Cache Python
+__pycache__/
+*.py[cod]
+
+# Cache e arquivos temporários do pytest
+.pytest_cache/
+
+# Arquivos do sistema macOS
+.DS_Store
+
+# Relatórios gerados pelo agente
+03_reports/
+
+# Logs de execução
+02_logs/
