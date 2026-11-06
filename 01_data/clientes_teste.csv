@@ -1,0 +1,9 @@
+
+id_cliente,nome,idade,email
+1,Ana,28,ana@email.com
+2,Bruno,35,bruno@email.com
+3,Carlos,,carlos@email.com
+4,Diana,42,
+5,Bruno,35,bruno@email.com
+5,Bruno,35,bruno@email.com
+6,Elena,29,elena@email.com

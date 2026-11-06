@@ -31,6 +31,86 @@ MODELO_GROQ = "openai/gpt-oss-20b"
 # INTERPRETAÇÃO COM IA
 # ============================================================
 
+def resumir_relatorio_para_ia(relatorio: dict) -> dict:
+    """
+    Cria um resumo compacto para envio à Groq.
+
+    O relatório técnico original permanece completo e é usado
+    localmente para auditoria e validação da interpretação.
+    """
+
+    analise = relatorio.get("analise_geral", {})
+    regras = relatorio.get("regras_negocio", {})
+    tratamento = relatorio.get("plano_tratamento", {})
+
+    regras_resumidas = []
+
+    for regra in regras.get("regras_violadas", []):
+        regras_resumidas.append({
+            "regra": regra.get("regra"),
+            "coluna": regra.get("coluna"),
+            "severidade": regra.get("severidade"),
+            "quantidade": regra.get("quantidade"),
+            "descricao": regra.get("descricao"),
+            # Apenas exemplos representativos; não são a lista completa.
+            "exemplos_registros_afetados": regra.get(
+                "registros_afetados", []
+            )[:3],
+        })
+
+    plano_resumido = []
+
+    for acao in tratamento.get("plano", []):
+        plano_resumido.append({
+            "id_plano": acao.get("id_plano"),
+            "regra": acao.get("regra"),
+            "coluna": acao.get("coluna"),
+            "severidade": acao.get("severidade"),
+            "quantidade_registros": acao.get(
+                "quantidade_registros"
+            ),
+            "acao_recomendada": acao.get("acao_recomendada"),
+            "justificativa": acao.get("justificativa"),
+            "requer_aprovacao_humana": acao.get(
+                "requer_aprovacao_humana"
+            ),
+            "status": acao.get("status"),
+        })
+
+    return {
+        "arquivo_analisado": relatorio.get("arquivo_analisado"),
+        "data_analise": relatorio.get("data_analise"),
+        "analise_geral": {
+            "total_linhas": analise.get("total_linhas"),
+            "total_colunas": analise.get("total_colunas"),
+            "linhas_duplicadas": analise.get("linhas_duplicadas"),
+            "valores_ausentes": analise.get("valores_ausentes"),
+            "percentual_ausentes": analise.get(
+                "percentual_ausentes"
+            ),
+            "colunas_constantes": analise.get("colunas_constantes"),
+            "possiveis_identificadores": analise.get(
+                "possiveis_identificadores"
+            ),
+            "tipos_dados": analise.get("tipos_dados"),
+        },
+        "regras_negocio": {
+            "total_regras_violadas": regras.get(
+                "total_regras_violadas"
+            ),
+            "total_ocorrencias": regras.get("total_ocorrencias"),
+            "regras_violadas": regras_resumidas,
+        },
+        "plano_tratamento": {
+            "total_acoes_recomendadas": tratamento.get(
+                "total_acoes_recomendadas"
+            ),
+            "acoes_pendentes": tratamento.get("acoes_pendentes"),
+            "plano": plano_resumido,
+        },
+    }
+
+
 def interpretar_com_ia(relatorio: dict) -> str:
     """
     Envia o relatório técnico para a Groq e retorna
@@ -48,8 +128,12 @@ def interpretar_com_ia(relatorio: dict) -> str:
 
     cliente = Groq(api_key=api_key)
 
+    # A Groq recebe somente o resumo compacto.
+    # O relatório completo continua preservado localmente.
+    relatorio_resumido = resumir_relatorio_para_ia(relatorio)
+
     dados_json = json.dumps(
-        relatorio,
+        relatorio_resumido,
         ensure_ascii=False,
         indent=2,
         default=str,

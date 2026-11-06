@@ -147,53 +147,93 @@ def _verificar_ausencias(
     df: pd.DataFrame,
     alertas: list[dict[str, str]],
 ) -> None:
+    """Valida menção, contagem e localização de ausências por coluna.
+
+    Em bases pequenas, valida as linhas CSV mencionadas pela IA. Em bases
+    volumosas, não exige a enumeração de todas as linhas, pois isso tornaria
+    a interpretação excessivamente extensa. A contagem por coluna continua
+    sendo verificada em ambos os casos.
+    """
     texto_norm = _normalizar(texto)
     ausencias = _obter_linhas_com_ausencias(df)
+    total_celulas_ausentes = int(df.isna().sum().sum())
+
+    # Limite para validar a localização individual de linhas.
+    # Bases maiores continuam sujeitas à validação de coluna e contagem.
+    validar_localizacao = total_celulas_ausentes <= 20
 
     for coluna, linhas_esperadas in ausencias.items():
         coluna_norm = _normalizar(coluna)
+        quantidade_real = len(linhas_esperadas)
 
         if coluna_norm not in texto_norm:
             _adicionar_alerta(
                 alertas,
                 "VALORES AUSENTES",
                 f"A interpretação não menciona a coluna '{coluna}', que possui "
-                f"{len(linhas_esperadas)} valor(es) ausente(s).",
+                f"{quantidade_real} valor(es) ausente(s).",
             )
             continue
 
-        linhas_associadas = _linhas_associadas_a_coluna(texto, coluna)
-        faltantes = sorted(set(linhas_esperadas) - linhas_associadas)
+        quantidade_mencionada = _extrair_contagem_por_coluna(texto, coluna)
 
-        if faltantes:
-            linhas_incorretas = sorted(
-                linhas_associadas - set(linhas_esperadas)
-            )
-            detalhe = (
-                f" Linhas associadas incorretamente à coluna: {linhas_incorretas}."
-                if linhas_incorretas
-                else ""
+        if (
+            quantidade_mencionada is not None
+            and quantidade_mencionada != quantidade_real
+        ):
+            _adicionar_alerta(
+                alertas,
+                "CONTAGEM DE AUSÊNCIAS POR COLUNA",
+                f"Contagem divergente para '{coluna}'. Esperada: "
+                f"{quantidade_real}; mencionada: {quantidade_mencionada}.",
             )
 
+        if not validar_localizacao:
+            continue
+
+        linhas_mencionadas = _linhas_associadas_a_coluna(texto, coluna)
+
+        if linhas_mencionadas != set(linhas_esperadas):
             _adicionar_alerta(
                 alertas,
                 "LOCALIZAÇÃO DE AUSÊNCIAS",
-                f"A coluna '{coluna}' possui valor(es) ausente(s) na(s) linha(s) "
-                f"CSV {linhas_esperadas}, mas a interpretação não as associa "
-                f"corretamente à coluna. Linha(s) não confirmada(s): {faltantes}."
-                f"{detalhe}",
+                f"Linhas CSV divergentes para '{coluna}'. "
+                f"Esperadas: {linhas_esperadas}; "
+                f"mencionadas: {sorted(linhas_mencionadas)}.",
             )
 
 
 def _extrair_contagem_por_coluna(texto: str, coluna: str) -> int | None:
+    """Extrai contagem de ausência por coluna, incluindo tabelas Markdown."""
+    coluna_norm = _normalizar(coluna)
+
+    # Formato do relatório atual: | **Ausências – idade** | 50 | 0,5% |
+    # Captura o primeiro valor inteiro após o nome da coluna, evitando
+    # interpretar a porcentagem seguinte (ex.: 0,5%) como a contagem.
+    for linha in texto.splitlines():
+        linha_norm = _normalizar(linha)
+        if coluna_norm not in linha_norm:
+            continue
+        if not re.search(r"ausencias?", linha_norm):
+            continue
+
+        partes = linha.split("|")
+        for parte in partes:
+            parte_norm = _normalizar(parte).strip(" *`_:-–—")
+            if coluna_norm in parte_norm or "ausencia" in parte_norm:
+                continue
+            match = re.fullmatch(r"\s*(\d+)\s*", parte)
+            if match:
+                return int(match.group(1))
+
     texto_norm = _normalizar(texto)
-    coluna_norm = re.escape(_normalizar(coluna))
+    coluna_norm_regex = re.escape(coluna_norm)
 
     padroes = [
-        rf"valores?\s+ausentes?\s*\(\s*{coluna_norm}\s*\)\s*\|\s*(\d+)",
-        rf"{coluna_norm}\s*[:|]\s*(\d+)\s*(?:\([^)]*\))?",
-        rf"{coluna_norm}\s*[:|]\s*(\d+)\s+valores?\s+ausentes?",
-        rf"(\d+)\s+valores?\s+ausentes?\s+(?:em|na coluna)\s+{coluna_norm}",
+        rf"valores?\s+ausentes?\s*\(\s*{coluna_norm_regex}\s*\)\s*[:|=]\s*(\d+)",
+        rf"{coluna_norm_regex}\s*[:|=]\s*(\d+)\s*(?:\([^)]*\))?",
+        rf"{coluna_norm_regex}\s*[:|=]\s*(\d+)\s+valores?\s+ausentes?",
+        rf"(\d+)\s+valores?\s+ausentes?\s+(?:em|na coluna)\s+{coluna_norm_regex}",
     ]
 
     for padrao in padroes:

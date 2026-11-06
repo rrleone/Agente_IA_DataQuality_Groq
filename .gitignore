@@ -2,17 +2,22 @@
 # Credenciais e variáveis de ambiente
 .env
 .env.*
+!.env.example
 
 # Ambientes Python
 .venv/
 venv/
+env/
 
 # Cache Python
 __pycache__/
 *.py[cod]
+*$py.class
 
 # Cache e arquivos temporários do pytest
 .pytest_cache/
+.coverage
+htmlcov/
 
 # Arquivos do sistema macOS
 .DS_Store
@@ -22,3 +27,11 @@ __pycache__/
 
 # Logs de execução
 02_logs/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Arquivos temporários e editores
+*.tmp
+*.swp
+.vscode/
