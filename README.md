@@ -1,4 +1,4 @@
-# Agente de IA — Data Quality
+<h1 align="center">Agente de IA — Data Quality</h1>
 
 <h2 align="center">AI-Powered Data Quality Analysis & Validation</h2>
 
