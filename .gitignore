@@ -22,11 +22,12 @@ htmlcov/
 # Arquivos do sistema macOS
 .DS_Store
 
-# Relatórios gerados pelo agente
-03_reports/
+# Logs e relatórios: manter estrutura no GitHub, ignorar conteúdo gerado
+02_logs/*
+!02_logs/.gitkeep
 
-# Logs de execução
-02_logs/
+03_reports/*
+!03_reports/.gitkeep
 
 # Jupyter Notebook
 .ipynb_checkpoints/
